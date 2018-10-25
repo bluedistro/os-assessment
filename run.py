@@ -33,7 +33,9 @@ def view_results(id_number):
         results = (results.to_dict(orient="records"))[0]
         return jsonify({"results": results,
                         "status": "success",
-                        "optional": "All Quizes are over 10, Labs 1 and 2 are over 5 and Lab 3 is over 20. Presentation is over 10."})
+                        "optional": "All Quizes are over 10, Labs 1 and 2"
+                                    " are over 5 and Lab 3 is over 20."
+                                    " Presentation is over 10."})
     except Exception as e:
         return jsonify({"status": "failure",
                         "optional": "Unknown Error during processing.."})
