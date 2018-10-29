@@ -1,4 +1,3 @@
 xlrd
-csv
 pandas
 flask
