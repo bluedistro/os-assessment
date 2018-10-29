@@ -4,10 +4,6 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-@app.route("/")
-def index():
-    return jsonify({"greeting": "hello guys!"})
-
 @app.route("/api/os/<int:id_number>")
 def view_results(id_number):
     # read data from excel to csv
