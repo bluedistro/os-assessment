@@ -15,4 +15,4 @@ def update_csv_file():
         return "error"
 
 # always run on update
-# print(update_csv_file())
+print(update_csv_file())
