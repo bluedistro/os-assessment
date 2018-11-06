@@ -27,15 +27,13 @@ def view_results(id_number):
         data = pd.read_csv("data.csv", na_values="NaN", header=None, names=headers)
         # cast id numbers to int
         data["Student_ID_Number"] = data["Student_ID_Number"].astype(int)
-
-        # fetch data given index number
         results = data.loc[data["Student_ID_Number"] == id_number]
         results = (results.to_dict(orient="records"))[0]
         return jsonify({"results": results,
                         "status": "success",
-                        "optional": "All Quizes are over 10, Labs 1 and 2"
-                                    " are over 5 and Lab 3 is over 20."
-                                    " Presentation is over 10."})
+                        "header_information": "All Quizzes are over 10, Labs 1 and 2"
+                                              " are over 5 and Lab 3 is over 20."
+                                              " Presentation is over 10."})
     except Exception as e:
         return jsonify({"status": "failure",
                         "optional": "Unknown Error during processing.."})
