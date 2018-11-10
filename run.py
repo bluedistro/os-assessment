@@ -10,8 +10,8 @@ def view_results(id_number):
     # read excel file
     xls_file = pd.ExcelFile('cpen_OS_Groups_to_TA.xlsx')
     # drop the header from the file and use declared ones
-    headers = ["Student_ID_Number", "Name", "Quiz_1", "Quiz_2", "Quiz_3", "Quiz_4",
-               "Lab_1", "Lab_2", "Lab_3", "Quiz_5", "Quiz_6", "Presentation", "Total"]
+    headers = ['Student_ID_Number', 'Name', 'Quiz_1', 'Quiz_2', 'Quiz_3', 'Quiz_4',
+               'Lab_1', 'Lab_2', 'Lab_3', 'Quiz_5', 'Quiz_6', 'Presentation', 'Total']
     data = xls_file.parse('assessment', names=headers)
 
     try:
@@ -19,6 +19,7 @@ def view_results(id_number):
         data["Student_ID_Number"] = data["Student_ID_Number"].astype(int)
         results = data.loc[data["Student_ID_Number"] == id_number]
         results = (results.to_dict(orient="records"))[0]
+        # convert to JSON data
         results = json.dumps(results)
         return jsonify({"results": results,
                         "status": "success",
