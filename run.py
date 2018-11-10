@@ -1,5 +1,6 @@
 import pandas as pd
 from flask import Flask, jsonify
+import json
 
 app = Flask(__name__)
 
@@ -18,6 +19,7 @@ def view_results(id_number):
         data["Student_ID_Number"] = data["Student_ID_Number"].astype(int)
         results = data.loc[data["Student_ID_Number"] == id_number]
         results = (results.to_dict(orient="records"))[0]
+        results = json.dumps(results)
         return jsonify({"results": results,
                         "status": "success",
                         "header_information": "All Quizzes are over 10, Labs 1 and 2"
