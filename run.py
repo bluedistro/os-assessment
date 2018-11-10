@@ -1,4 +1,3 @@
-import xlrd, csv
 import pandas as pd
 from flask import Flask, jsonify
 
@@ -7,24 +6,14 @@ app = Flask(__name__)
 
 @app.route("/api/os/<int:id_number>")
 def view_results(id_number):
-    # read data from excel to csv
-    # try:
-    #     with xlrd.open_workbook("cpen_OS_Groups_to_TA.xlsx") as wb:
-    #          sh = wb.sheet_by_index(1)
-    #          with open("data.csv", "wb") as f:
-    #              c = csv.writer(f)
-    #              for r in range(1, sh.nrows):
-    #                  c.writerow(sh.row_values(r))
-    # except Exception as e:
-    #     return jsonify({"status": "failure",
-    #                     "optional": "Error occurred during Data Fetching"})
-
-    # main work
+    # read excel file
+    xls_file = pd.ExcelFile('cpen_OS_Groups_to_TA.xlsx')
+    # drop the header from the file and use declared ones
     headers = ["Student_ID_Number", "Name", "Quiz_1", "Quiz_2", "Quiz_3", "Quiz_4",
                "Lab_1", "Lab_2", "Lab_3", "Quiz_5", "Quiz_6", "Presentation", "Total"]
+    data = xls_file.parse('assessment', names=headers)
 
     try:
-        data = pd.read_csv("data.csv", na_values="NaN", header=None, names=headers)
         # cast id numbers to int
         data["Student_ID_Number"] = data["Student_ID_Number"].astype(int)
         results = data.loc[data["Student_ID_Number"] == id_number]
