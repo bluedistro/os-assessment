@@ -21,6 +21,7 @@ def view_results(id_number):
         results = (results.to_dict(orient="records"))[0]
         # convert to JSON data
         results = json.dumps(results)
+        # noinspection PyInterpreter
         return jsonify({"results": results,
                         "status": "success",
                         "header_information": "All Quizzes are over 10, Labs 1 and 2"
