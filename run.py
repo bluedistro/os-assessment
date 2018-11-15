@@ -1,5 +1,5 @@
 import pandas as pd
-from flask import Flask, jsonify
+from flask import Flask
 import json
 
 app = Flask(__name__)
@@ -19,20 +19,12 @@ def view_results(id_number):
         data["Student_ID_Number"] = data["Student_ID_Number"].astype(int)
         results = data.loc[data["Student_ID_Number"] == id_number]
         results = (results.to_dict(orient="records"))[0]
-        # convert to JSON data
-        # results = json.dumps(results)
         info = ({"results": results,
-                          "status": "success",
-                          "header_information": "All Quizzes are over 10, Labs 1 and 2"
-                                                "are over 5 and Lab 3 is over 20."
-                                                "Presentation is over 10"})
+                 "status": "success",
+                 "header_information": "All Quizzes are over 10, Labs 1 and 2"
+                                        "are over 5 and Lab 3 is over 20."
+                                        "Presentation is over 10"})
         return json.dumps(info)
-        # noinspection PyInterpreter
-        # return jsonify({"results": results,
-                        # "status": "success",
-                        # "header_information": "All Quizzes are over 10, Labs 1 and 2"
-                                            #   " are over 5 and Lab 3 is over 20."
-                                            #   " Presentation is over 10."})
     except Exception as e:
         return jsonify({"status": "failure",
                         "optional": "Unknown Error during processing.."})
