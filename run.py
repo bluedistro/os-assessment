@@ -26,7 +26,7 @@ def view_results(id_number):
                                         "Presentation is over 10"})
         return json.dumps(info)
     except Exception as e:
-print(str(e))
+	print(str(e))
         return jsonify({"status": "failure",
                         "optional": "Unknown Error during processing.."})
 
